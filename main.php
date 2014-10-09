@@ -61,7 +61,8 @@
 		$oData = json_decode(file_get_contents($url));
 		if ($oData->meta->code == 200)
 		{
-			// showArray($oData->data); exit;
+			showArray($oData->data); exit;
+			/*
 			foreach ($oData->data as $oPhoto)
 			{
 				?>
@@ -70,6 +71,7 @@
 					</a>
 				<?php
 			}
+			*/
 		}
 	}
 ?>
