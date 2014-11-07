@@ -1,0 +1,87 @@
+* { margin: 0; padding: 0; }
+.clear { clear: both; }
+.left { float: left; }
+.right { float: right; }
+
+body {
+	font-family: 'Helvetica Neue', Helvetica, sans-serif;
+	background-color: #EEEEEE;
+	padding: 20px;
+}
+
+h1 {
+	text-shadow:0 1px 0 #FFFFFF;
+	margin-bottom: 15px;
+}
+
+.logo {
+	background: url(/images/logo.png) no-repeat 0 0;
+	min-height: 40px;
+	padding: 2px 0 0 50px;
+}
+
+a.uline {
+	/*color: #0000FF;*/
+	color: rgb(0, 0, 255);
+	border-bottom: 1px solid rgba(0, 0, 255, 0.3);
+	text-decoration: none;
+}
+
+a:hover.uline {
+	/*color: #FF0000;*/
+	color: rgb(255, 0, 0);
+	border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+}
+
+a:visited.uline {
+	/*color: #800080;*/
+	color: rgb(128, 0, 128);
+	border-bottom: 1px solid rgba(128, 0, 128, 0.3);
+}
+
+.item {
+	border-radius: 4px;
+	background-color: #FFFFFF;
+	padding: 10px;
+	margin: 10px 10px 10px 0px;
+}
+
+.item:hover {
+	box-shadow: 1px 1px 5px #C0C0C0;
+}
+
+.author img {
+	border-radius: 20px;
+	margin-right: 8px;
+	width: 40px;
+}
+
+.location {
+	background: url(/images/feed-assets.png) no-repeat -4px -204px;
+	padding-left: 15px;
+	font-size: smaller;
+	margin-top: 3px;
+}
+
+.time {
+	font-size: smaller;
+}
+
+.stats div {
+	padding: 2px 0 0 17px;
+	font-size: smaller;
+	margin-top: 3px;
+}
+
+.likes {
+	background: url(/images/profile-page-assets.png) no-repeat 3px -96px;
+	margin-right: 5px;
+}
+
+.comments {
+	background: url(/images/profile-page-assets.png) no-repeat 3px 4px;
+}
+
+.photo img {
+	border-radius: 4px;
+}
