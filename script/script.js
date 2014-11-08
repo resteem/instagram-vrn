@@ -1,3 +1,5 @@
 $(document).ready(function(){
-	alert('test');
+	$("a").hover(function () {
+		$("a[href='" + $(this).attr("href") + "']").toggleClass("hover");
+	});
 });

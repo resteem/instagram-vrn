@@ -27,7 +27,7 @@ a.uline {
 	text-decoration: none;
 }
 
-a:hover.uline {
+a:hover.uline, a.uline.hover {
 	/*color: #FF0000;*/
 	color: rgb(255, 0, 0);
 	border-bottom: 1px solid rgba(255, 0, 0, 0.3);
