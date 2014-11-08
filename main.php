@@ -48,9 +48,11 @@
 							<?=$arPhoto['USER']['USERNAME'];?>
 						</a>
 						<div class="location">
-							<a class="uline" href="<?=$arPhoto['LOCATION']['LINK'];?>" title="<?=($arPhoto['LOCATION']['NAME'] ? $arPhoto['LOCATION']['NAME'] : $arPhoto['LOCATION']['NAME_BY_COORD']);?>">
-								Location
-							</a>
+							<div class="location_a_wrapper">
+								<a class="uline" href="<?=$arPhoto['LOCATION']['LINK'];?>" title="<?=$arPhoto['LOCATION']['NAME'];?>">
+									<?=$arPhoto['LOCATION']['NAME'];?>
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>

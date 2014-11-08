@@ -7,6 +7,21 @@
 		}
 	} // showArray
 
+	if (!function_exists('truncate'))
+	{
+		function truncate($text, $cnt = 50)
+		{
+			if (strlen($text) > $cnt)
+			{
+				$text = $text . ' ';
+				$text = substr($text, 0, $cnt);
+				$text = substr($text, 0, strrpos($text, ' '));
+				$text = trim($text) . '…';
+			}
+			return $text;
+		}
+	} // truncate
+
 	if (!function_exists('getTplUrlLocation'))
 	{
 		function getTplUrlLocation($arParams)
@@ -52,8 +67,7 @@
 									'COMMENTS_COUNT' => $oPhoto->comments->count,
 								),
 								'LOCATION' => array(
-									'NAME' => $oPhoto->location->name,
-									'NAME_BY_COORD' => $oPhoto->location->latitude . ', ' . $oPhoto->location->longitude,
+									'NAME' => ($oPhoto->location->name ? $oPhoto->location->name : $oPhoto->location->latitude . ', ' . $oPhoto->location->longitude),
 									'ID' => $oPhoto->location->id,
 									'LATITUDE' => $oPhoto->location->latitude,
 									'LONGITUDE' => $oPhoto->location->longitude,

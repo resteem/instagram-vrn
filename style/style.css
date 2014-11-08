@@ -29,7 +29,7 @@ h2 {
 	font-size: smaller;
 	font-weight: normal;
 	color: #909090;
-	/*margin-bottom: 15px;*/
+	margin-bottom: 10px;
 }
 
 a.uline {
@@ -73,6 +73,12 @@ a:visited.uline {
 	padding-left: 15px;
 	font-size: smaller;
 	margin-top: 3px;
+	overflow: hidden;
+	max-width: 170px;
+}
+
+.location .location_a_wrapper {
+	width: 1000px;
 }
 
 .time {
