@@ -1,1 +1,1 @@
-Show Voronezh city photos.
+Show Voronezh city photos from Instagram.
