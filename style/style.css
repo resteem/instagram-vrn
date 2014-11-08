@@ -1,4 +1,5 @@
 * { margin: 0; padding: 0; }
+header, nav, section, article, aside, footer { display: block; }
 .clear { clear: both; }
 .left { float: left; }
 .right { float: right; }
@@ -9,15 +10,26 @@ body {
 	padding: 20px;
 }
 
-h1 {
-	text-shadow:0 1px 0 #FFFFFF;
-	margin-bottom: 15px;
-}
-
 .logo {
 	background: url(/images/logo.png) no-repeat 0 0;
-	min-height: 40px;
-	padding: 2px 0 0 50px;
+	height: 51px;
+	width: 51px;
+}
+
+.header {
+	margin-left: 7px;
+}
+
+h1 {
+	/*text-shadow:0 1px 0 #FFFFFF;*/
+	font-weight: normal;
+}
+
+h2 {
+	font-size: smaller;
+	font-weight: normal;
+	color: #909090;
+	/*margin-bottom: 15px;*/
 }
 
 a.uline {

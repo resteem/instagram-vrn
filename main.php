@@ -2,13 +2,21 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script> 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="script/script.js"></script>
 	<link rel="stylesheet" type="text/css" href="style/style.css">
 	<title>Воронеж в Инстаграме</title>
 </head>
 <body>
-	<h1 class="logo">Что сфотографировали в Воронеже за последние сутки</h1>
+<header>
+	<div class="logo left" title="Воронеж в Инстаграме"></div>
+	<div class="header left">
+		<h1>Воронеж в Инстаграме</h1>
+		<h2>Что сегодня фотографируют в Воронеже</h2>
+	</div>
+	<div class="clear"></div>
+</header>
 <?
 	include_once('_/auth_configs.php');
 	include_once('lib/functions.php');
@@ -64,6 +72,11 @@
 			</div>
 		</div><?
 		endforeach;
-	?></div>
+	?>
+	<div class="clear"></div>
+	</div>
+<footer>
+	© 2014
+</footer>
 </body>
 </html>
