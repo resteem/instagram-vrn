@@ -26,10 +26,10 @@
 		if (isAuthorized()):
 			?>
 			<div class="user">
-				<div class="userpic left" title="<?=$_COOKIE['INSTAGRAM_USER_NAME'];?>">
-					<img src="<?=$_COOKIE['INSTAGRAM_USER_PIC'];?>">
+				<div class="userpic left" title="<?=$instagram->getUsername();?>">
+					<img src="<?=$instagram->getProfilePicture();?>">
 				</div>
-				<div class="username left"><?=$_COOKIE['INSTAGRAM_USER_NAME'];?></div>
+				<div class="username left"><?=$instagram->getUsername()?></div>
 			</div>
 			<?
 		endif;
@@ -48,49 +48,47 @@
 		'DISTANCE' => '5000',
 		'MIN_TIMESTAMP' => $now - (60 * 60 * 24), // yesterday
 		'MAX_TIMESTAMP' => $now,
-		'INSTAGRAM_ACCESS_TOKEN' => $instagram->getAccessToken(),
 	);
-	$tplUrlLocationCircle = getTplUrlLocation($arParams);
-
-	$arPhotos = getLocationPhotos($arCityRussia36, $tplUrlLocationCircle);
+	$arAllMedia = $instagram->getMediaByLocationPoints($arCityRussia36, $arParams);
 ?>
 	<div class="items"><?
-		foreach ($arPhotos as $arPhoto):
+		foreach ($arAllMedia as $oMedia):
+			$arMedia = getArMediaFromInsta($oMedia);
 		?><div class="item left">
 			<div class="info">
 				<div class="author left">
 					<div class="left">
-						<a href="<?=$arPhoto['USER']['PROFILE_URL'];?>" title="<?=$arPhoto['USER']['FULL_NAME'];?>">
-							<img src="<?=$arPhoto['USER']['PROFILE_PICTURE'];?>" alt="<?=$arPhoto['USER']['USERNAME'];?>">
+						<a href="<?=$arMedia['USER']['PROFILE_URL'];?>" title="<?=$arMedia['USER']['FULL_NAME'];?>">
+							<img src="<?=$arMedia['USER']['PROFILE_PICTURE'];?>" alt="<?=$arMedia['USER']['USERNAME'];?>">
 						</a>
 					</div>
 					<div class="left">
-						<a class="uline" href="<?=$arPhoto['USER']['PROFILE_URL'];?>" title="<?=($arPhoto['USER']['FULL_NAME'] ? $arPhoto['USER']['FULL_NAME'] : $arPhoto['USER']['USERNAME']);?>">
-							<?=$arPhoto['USER']['USERNAME'];?>
+						<a class="uline" href="<?=$arMedia['USER']['PROFILE_URL'];?>" title="<?=($arMedia['USER']['FULL_NAME'] ? $arMedia['USER']['FULL_NAME'] : $arMedia['USER']['USERNAME']);?>">
+							<?=$arMedia['USER']['USERNAME'];?>
 						</a>
 						<div class="location">
 							<div class="location_a_wrapper">
-								<a class="uline" href="<?=$arPhoto['LOCATION']['LINK'];?>" title="<?=$arPhoto['LOCATION']['NAME'];?>">
-									<?=$arPhoto['LOCATION']['NAME'];?>
+								<a class="uline" href="<?=$arMedia['LOCATION']['LINK'];?>" title="<?=$arMedia['LOCATION']['NAME'];?>">
+									<?=$arMedia['LOCATION']['NAME'];?>
 								</a>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="right">
-					<div class="time right" title="<?=date('d.m.Y H:i:s', $arPhoto['MEDIA']['CREATED_TIME']);?>">
-						<?=date('H:i', $arPhoto['MEDIA']['CREATED_TIME']);?>
+					<div class="time right" title="<?=date('d.m.Y H:i:s', $arMedia['MEDIA']['CREATED_TIME']);?>">
+						<?=date('H:i', $arMedia['MEDIA']['CREATED_TIME']);?>
 					</div>
 					<div class="clear"></div>
 					<div class="stats right">
-						<div class="comments right"><?=$arPhoto['MEDIA']['COMMENTS_COUNT']?></div>
-						<div class="likes right"><?=$arPhoto['MEDIA']['LIKES_COUNT']?></div>
+						<div class="comments right"><?=$arMedia['MEDIA']['COMMENTS_COUNT']?></div>
+						<div class="likes right"><?=$arMedia['MEDIA']['LIKES_COUNT']?></div>
 					</div>
 				</div>
 			</div>
 			<div class="photo">
-				<a href="<?=$arPhoto['MEDIA']['LINK'];?>" title="<?=$arPhoto['MEDIA']['CAPTION'];?>">
-					<img src="<?=$arPhoto['MEDIA']['URL_LOW']?>">
+				<a href="<?=$arMedia['MEDIA']['LINK'];?>" title="<?=$arMedia['MEDIA']['CAPTION'];?>">
+					<img src="<?=$arMedia['MEDIA']['URL_LOW']?>">
 				</a>
 			</div>
 		</div><?

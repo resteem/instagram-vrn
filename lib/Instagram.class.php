@@ -21,6 +21,38 @@
 			$this->setRedirectUri($arParams['REDIRECT_URI']);
 		}
 
+		public function getMediaByLocationPoints($arPoints, $arParams)
+		{
+			$arMedia = array();
+			foreach ($arPoints as $arPoint)
+			{
+				$arTmp = $this->getMediaByLocationPoint($arPoint, $arParams);
+				$arMedia = array_merge($arMedia, $arTmp);
+			}
+			return $arMedia;
+		}
+
+		public function getMediaByLocationPoint($arPoint, $arParams)
+		{
+			$url = self::URL_MEDIA_SEARCH .
+				'?access_token=' . $this->getAccessToken() .
+				'&distance=' . $arParams['DISTANCE'] .
+				'&min_timestamp=' . $arParams['MIN_TIMESTAMP'] .
+				'&max_timestamp=' . $arParams['MAX_TIMESTAMP'] .
+				'&lat=%LAT%&lng=%LNG%';
+			$arMedia = array();
+			$url = str_replace(array('%LAT%', '%LNG%'), array($arPoint['LAT'], $arPoint['LNG']), $url);
+			$oData = json_decode(file_get_contents($url));
+			if ($oData->meta->code == 200)
+			{
+				foreach ($oData->data as $oMedia)
+				{
+					$arMedia[$oMedia->id] = $oMedia;
+				}
+			}
+			return $arMedia;
+		}
+
 		public function getAuthUrl()
 		{
 			return self::URL_AUTH . '?client_id=' . $this->getClientId() . '&redirect_uri=' . urlencode($this->getRedirectUri()) . '&response_type=code';
