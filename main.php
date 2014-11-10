@@ -2,21 +2,7 @@
 <html lang="ru">
 <head prefix="og: http://ogp.me/ns#">
 	<meta charset="utf-8">
-	<meta property="og:site_name" content="Воронеж в Инстаграме">
-	<meta property="og:url" content="http://instagram-vrn.appspot.com/">
-	<meta property="og:description" content="Что сегодня фотографируют в Воронеже">
-	<meta property="og:image" content="http://instagram-vrn.appspot.com/images/logo384.png">
-	<meta property="og:image:type" content="image/png">
-	<meta property="og:image:width" content="384">
-	<meta property="og:image:height" content="384">
-
-	<meta name="twitter:card" content="summary">
-	<meta name="twitter:title" content="Воронеж в Инстаграме">
-	<meta name="twitter:description" content="Что сегодня фотографируют в Воронеже">
-	<meta name="twitter:image" content="http://instagram-vrn.appspot.com/images/logo384.png">
-	<meta name="twitter:url" content="http://instagram-vrn.appspot.com/">
 	<title>Воронеж в Инстаграме</title>
-
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="script/script.js"></script>
