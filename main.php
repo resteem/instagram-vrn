@@ -10,9 +10,9 @@
 </head>
 <body>
 <?
-	include_once('_/analyticstracking.php');
-	include_once('_/auth_configs.php');
-	include_once('lib/functions.php');
+	require_once('/lib/functions.php');
+	include_once('/_/analyticstracking.php');
+	$instagram = getInstagramInstance();
 ?>
 <header>
 	<div class="left">
@@ -48,7 +48,7 @@
 		'DISTANCE' => '5000',
 		'MIN_TIMESTAMP' => $now - (60 * 60 * 24), // yesterday
 		'MAX_TIMESTAMP' => $now,
-		'INSTAGRAM_ACCESS_TOKEN' => $_COOKIE['INSTAGRAM_ACCESS_TOKEN'],
+		'INSTAGRAM_ACCESS_TOKEN' => $instagram->getAccessToken(),
 	);
 	$tplUrlLocationCircle = getTplUrlLocation($arParams);
 

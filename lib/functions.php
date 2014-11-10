@@ -1,4 +1,7 @@
-<?php
+<?
+	require_once('/_/auth_configs.php');
+	require_once('/lib/Instagram.class.php');
+
 	if (!function_exists('showArray'))
 	{
 		function showArray($value)
@@ -23,11 +26,35 @@
 		}
 	} // isDevMode
 
+	if (!function_exists('getInstagramInstance'))
+	{
+		function getInstagramInstance()
+		{
+			if ($_COOKIE['INSTAGRAM_INSTANCE'])
+			{
+				$instagram = unserialize($_COOKIE['INSTAGRAM_INSTANCE']);
+			}
+			else
+			{
+				$arInstaParams = array(
+					'CLIENT_ID' => INSTAGRAM_CLIENT_ID,
+					'CLIENT_SECRET' => INSTAGRAM_CLIENT_SECRET,
+					'REDIRECT_URI' => INSTAGRAM_REDIRECT_URI,
+				);
+				$instagram = new Instagram($arInstaParams);
+				setcookie('INSTAGRAM_INSTANCE', serialize($instagram));
+			}
+			return $instagram;
+		}
+	} // getInstagramInstance
+
 	if (!function_exists('isAuthorized'))
 	{
 		function isAuthorized()
 		{
-			return !empty($_COOKIE['INSTAGRAM_ACCESS_TOKEN']);
+			$instagram = getInstagramInstance();
+			$token = $instagram->getAccessToken();
+			return $token;
 		}
 	} // isAuthorized
 
