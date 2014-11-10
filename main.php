@@ -44,7 +44,9 @@
 	<div class="clear"></div>
 </header>
 <?if (!isAuthorized()):?>
-	<a href="/login">Войти</a>
+	Для просмотра фотографий требуется <a class="uline" href="/login">войти</a> через Instagram.
+	<br>
+	<br>
 <?else:?>
 <?
 	include_once('lib/city_russia_36.php');
