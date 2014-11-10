@@ -9,19 +9,33 @@
 	<title>Воронеж в Инстаграме</title>
 </head>
 <body>
-<header>
-	<div class="logo left" title="Воронеж в Инстаграме"></div>
-	<div class="header left">
-		<h1>Воронеж в Инстаграме</h1>
-		<h2>Что сегодня фотографируют в Воронеже</h2>
-	</div>
-	<div class="clear"></div>
-</header>
 <?
 	include_once('_/analyticstracking.php');
 	include_once('_/auth_configs.php');
 	include_once('lib/functions.php');
 ?>
+<header>
+	<div class="left">
+		<div class="logo left" title="Воронеж в Инстаграме"></div>
+		<div class="header left">
+			<h1>Воронеж в Инстаграме</h1>
+			<h2>Что сегодня фотографируют в Воронеже</h2>
+		</div>
+	</div>
+	<div class="right"><?
+		if (isAuthorized()):
+			?>
+			<div class="user">
+				<div class="userpic left" title="<?=$_COOKIE['INSTAGRAM_USER_NAME'];?>">
+					<img src="<?=$_COOKIE['INSTAGRAM_USER_PIC'];?>">
+				</div>
+				<div class="username left"><?=$_COOKIE['INSTAGRAM_USER_NAME'];?></div>
+			</div>
+			<?
+		endif;
+	?></div>
+	<div class="clear"></div>
+</header>
 <?if (!isAuthorized()):?>
 	<a href="/login">Войти</a>
 <?else:?>
