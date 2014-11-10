@@ -7,20 +7,29 @@
 		}
 	} // showArray
 
-	if (!function_exists('truncate'))
+	if (!function_exists('redirect'))
 	{
-		function truncate($text, $cnt = 50)
+		function redirect($URL)
 		{
-			if (strlen($text) > $cnt)
-			{
-				$text = $text . ' ';
-				$text = substr($text, 0, $cnt);
-				$text = substr($text, 0, strrpos($text, ' '));
-				$text = trim($text) . '…';
-			}
-			return $text;
+			header('Location: ' . $URL);
 		}
-	} // truncate
+	} // redirect
+
+	if (!function_exists('isDevMode'))
+	{
+		function isDevMode()
+		{
+			return (strpos($_SERVER['HTTP_HOST'], 'localhost') === 0);
+		}
+	} // isDevMode
+
+	if (!function_exists('isAuthorized'))
+	{
+		function isAuthorized()
+		{
+			return !empty($_COOKIE['INSTAGRAM_ACCESS_TOKEN']);
+		}
+	} // isAuthorized
 
 	if (!function_exists('getTplUrlLocation'))
 	{
@@ -53,7 +62,7 @@
 						{
 							$arIDs[] = $oPhoto->id;
 							$arPhotos[] = array(
-								'OBJECT' => array(
+								'MEDIA' => array(
 									'ID' => $oPhoto->id,
 									'TYPE' => $oPhoto->type,
 									'FILTER' => $oPhoto->filter,

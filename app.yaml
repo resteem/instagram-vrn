@@ -5,6 +5,9 @@ api_version: 1
 threadsafe: yes
 
 handlers:
+- url: /login
+  script: login/index.php
+
 - url: /script
   static_dir: script
 

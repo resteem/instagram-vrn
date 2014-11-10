@@ -18,16 +18,21 @@
 	<div class="clear"></div>
 </header>
 <?
+	include_once('_/analyticstracking.php');
 	include_once('_/auth_configs.php');
 	include_once('lib/functions.php');
+?>
+<?if (!isAuthorized()):?>
+	<a href="/login">Войти</a>
+<?else:?>
+<?
 	include_once('lib/city_russia_36.php');
-
 	$now = time();
 	$arParams = array(
 		'DISTANCE' => '5000',
 		'MIN_TIMESTAMP' => $now - (60 * 60 * 24), // yesterday
 		'MAX_TIMESTAMP' => $now,
-		'INSTAGRAM_ACCESS_TOKEN' => $INSTAGRAM_ACCESS_TOKEN,
+		'INSTAGRAM_ACCESS_TOKEN' => $_COOKIE['INSTAGRAM_ACCESS_TOKEN'],
 	);
 	$tplUrlLocationCircle = getTplUrlLocation($arParams);
 
@@ -57,19 +62,19 @@
 					</div>
 				</div>
 				<div class="right">
-					<div class="time right" title="<?=date('d.m.Y H:i:s', $arPhoto['OBJECT']['CREATED_TIME']);?>">
-						<?=date('H:i', $arPhoto['OBJECT']['CREATED_TIME']);?>
+					<div class="time right" title="<?=date('d.m.Y H:i:s', $arPhoto['MEDIA']['CREATED_TIME']);?>">
+						<?=date('H:i', $arPhoto['MEDIA']['CREATED_TIME']);?>
 					</div>
 					<div class="clear"></div>
 					<div class="stats right">
-						<div class="comments right"><?=$arPhoto['OBJECT']['COMMENTS_COUNT']?></div>
-						<div class="likes right"><?=$arPhoto['OBJECT']['LIKES_COUNT']?></div>
+						<div class="comments right"><?=$arPhoto['MEDIA']['COMMENTS_COUNT']?></div>
+						<div class="likes right"><?=$arPhoto['MEDIA']['LIKES_COUNT']?></div>
 					</div>
 				</div>
 			</div>
 			<div class="photo">
-				<a href="<?=$arPhoto['OBJECT']['LINK'];?>" title="<?=$arPhoto['OBJECT']['CAPTION'];?>">
-					<img src="<?=$arPhoto['OBJECT']['URL_LOW']?>">
+				<a href="<?=$arPhoto['MEDIA']['LINK'];?>" title="<?=$arPhoto['MEDIA']['CAPTION'];?>">
+					<img src="<?=$arPhoto['MEDIA']['URL_LOW']?>">
 				</a>
 			</div>
 		</div><?
@@ -77,6 +82,7 @@
 	?>
 	<div class="clear"></div>
 	</div>
+<?endif;?>
 <footer>
 	© 2014
 </footer>
