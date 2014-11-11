@@ -1,6 +1,15 @@
 <?
-	require_once('/_/auth_configs.php');
-	require_once('/lib/Instagram.class.php');
+	require_once(getenv('DOCUMENT_ROOT') . '/_/auth_configs.php');
+	require_once('Instagram.class.php');
+
+	if (!function_exists('redirect'))
+	{
+		function redirect($URL)
+		{
+			// header('Location: ' . $URL);
+			die('<script>location.href = "' . $URL . '"</script>');
+		}
+	} // redirect
 
 	if (!function_exists('showArray'))
 	{
@@ -9,14 +18,6 @@
 			echo '<pre>', print_r($value, TRUE), '</pre>';
 		}
 	} // showArray
-
-	if (!function_exists('redirect'))
-	{
-		function redirect($URL)
-		{
-			header('Location: ' . $URL);
-		}
-	} // redirect
 
 	if (!function_exists('isDevMode'))
 	{
@@ -42,11 +43,20 @@
 					'REDIRECT_URI' => INSTAGRAM_REDIRECT_URI,
 				);
 				$instagram = new Instagram($arInstaParams);
-				setcookie('INSTAGRAM_INSTANCE', serialize($instagram));
+				setInstagramInstance($instagram);
 			}
 			return $instagram;
 		}
 	} // getInstagramInstance
+
+	if (!function_exists('setInstagramInstance'))
+	{
+		function setInstagramInstance($instagram)
+		{
+			// $_COOKIE['INSTAGRAM_INSTANCE'] = serialize($instagram);
+			setcookie('INSTAGRAM_INSTANCE', serialize($instagram));
+		}
+	} // setInstagramInstance
 
 	if (!function_exists('isAuthorized'))
 	{

@@ -1,19 +1,20 @@
-<!DOCTYPE html>
+<?
+	require_once('lib/functions.php');
+	$instagram = getInstagramInstance();
+?><!DOCTYPE html>
 <html lang="ru">
-<head prefix="og: http://ogp.me/ns#">
+<head>
 	<meta charset="utf-8">
 	<title>Воронеж в Инстаграме</title>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="script/script.js"></script>
+<?
+		include_once('_/analyticstracking.php');
+?>
 	<link rel="stylesheet" type="text/css" href="style/style.css">
 </head>
 <body>
-<?
-	require_once('/lib/functions.php');
-	include_once('/_/analyticstracking.php');
-	$instagram = getInstagramInstance();
-?>
 <header>
 	<div class="left">
 		<div class="logo left" title="Воронеж в Инстаграме"></div>
@@ -35,20 +36,17 @@
 		endif;
 	?></div>
 	<div class="clear"></div>
-</header>
-<?if (!isAuthorized()):?>
-	Для просмотра фотографий требуется <a class="uline" href="/login">войти</a> через Instagram.
-	<br>
-	<br>
-<?else:?>
-<?
-	include_once('lib/city_russia_36.php');
+</header><?
+if (!isAuthorized()):
+	?><br>Для просмотра фотографий требуется <a class="uline" href="/login">войти через Instagram</a>.<br><br><?
+else: // if (!isAuthorized()):
 	$now = time();
 	$arParams = array(
 		'DISTANCE' => '5000',
 		'MIN_TIMESTAMP' => $now - (60 * 60 * 24), // yesterday
 		'MAX_TIMESTAMP' => $now,
 	);
+	include_once('lib/city_russia_36.php');
 	$arAllMedia = $instagram->getMediaByLocationPoints($arCityRussia36, $arParams);
 ?>
 	<div class="items"><?
@@ -95,9 +93,9 @@
 		endforeach;
 	?>
 	<div class="clear"></div>
-	</div>
-<?endif;?>
-<footer>
+	</div><?
+endif; // if (!isAuthorized()):
+?><footer>
 	© 2014
 </footer>
 </body>

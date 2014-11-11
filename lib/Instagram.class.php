@@ -1,4 +1,4 @@
-<?php
+<?
 	class Instagram
 	{
 		const URL_MEDIA_SEARCH = 'https://api.instagram.com/v1/media/search';
@@ -145,6 +145,4 @@
 		{
 			return $this->_userId;
 		}
-
 	}
-?>

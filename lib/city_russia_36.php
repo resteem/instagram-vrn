@@ -1,4 +1,4 @@
-<?php
+<?
 	// Draw circles on Google maps - http://www.mapdevelopers.com/draw-circle-tool.php
 
 	$arCityRussia36 = array(

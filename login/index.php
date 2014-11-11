@@ -1,5 +1,5 @@
 <?
-	require_once('/lib/functions.php');
+	require_once(getenv('DOCUMENT_ROOT') . '/lib/functions.php');
 
 	if (isAuthorized())
 	{
@@ -14,7 +14,7 @@
 		$instagram->setUsername(DEV_USER_NAME);
 		$instagram->setProfilePicture(DEV_USER_PIC);
 		$instagram->setUserId(DEV_USER_ID);
-		setcookie('INSTAGRAM_INSTANCE', serialize($instagram));
+		setInstagramInstance($instagram);
 
 		redirect('/'); exit;
 	}
@@ -40,9 +40,8 @@
 			$instagram->setUsername($response->user->username);
 			$instagram->setProfilePicture($response->user->profile_picture);
 			$instagram->setUserId($response->user->id);
-			setcookie('INSTAGRAM_INSTANCE', serialize($instagram));
+			setInstagramInstance($instagram);
 
 			redirect('/'); exit;
 		}
 	}
-?>
