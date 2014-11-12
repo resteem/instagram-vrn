@@ -1,18 +1,14 @@
 <?
 	class Instagram
 	{
+		const URL_LOGOUT = 'https://instagram.com/accounts/logout/';
 		const URL_MEDIA_SEARCH = 'https://api.instagram.com/v1/media/search';
 		const URL_AUTH = 'https://api.instagram.com/oauth/authorize';
 		const URL_ACCESS_TOKEN = 'https://api.instagram.com/oauth/access_token';
 
-		private $_clientId;
-		private $_clientSecret;
-		private $_redirectUri;
-
-		private $_accessToken;
-		private $_username;
-		private $_profilePicture;
-		private $_userId;
+		private $_clientId = '';
+		private $_clientSecret = '';
+		private $_redirectUri = '';
 
 		function __construct($arParams)
 		{
@@ -35,7 +31,7 @@
 		public function getMediaByLocationPoint($arPoint, $arParams)
 		{
 			$url = self::URL_MEDIA_SEARCH .
-				'?access_token=' . $this->getAccessToken() .
+				'?access_token=' . $arParams['ACCESS_TOKEN'] .
 				'&distance=' . $arParams['DISTANCE'] .
 				'&min_timestamp=' . $arParams['MIN_TIMESTAMP'] .
 				'&max_timestamp=' . $arParams['MAX_TIMESTAMP'] .
@@ -81,12 +77,11 @@
 			return json_decode($response);
 		}
 
-		// getters-setters
-
 		public function setClientId($value)
 		{
 			$this->_clientId = $value;
 		}
+
 		public function getClientId()
 		{
 			return $this->_clientId;
@@ -96,6 +91,7 @@
 		{
 			$this->_clientSecret = $value;
 		}
+
 		public function getClientSecret()
 		{
 			return $this->_clientSecret;
@@ -105,44 +101,9 @@
 		{
 			$this->_redirectUri = $value;
 		}
+
 		public function getRedirectUri()
 		{
 			return $this->_redirectUri;
-		}
-
-		public function setAccessToken($value)
-		{
-			$this->_accessToken = $value;
-		}
-		public function getAccessToken()
-		{
-			return $this->_accessToken;
-		}
-
-		public function setUsername($value)
-		{
-			$this->_username = $value;
-		}
-		public function getUsername()
-		{
-			return $this->_username;
-		}
-
-		public function setProfilePicture($value)
-		{
-			$this->_profilePicture = $value;
-		}
-		public function getProfilePicture()
-		{
-			return $this->_profilePicture;
-		}
-
-		public function setUserId($value)
-		{
-			$this->_userId = $value;
-		}
-		public function getUserId()
-		{
-			return $this->_userId;
 		}
 	}

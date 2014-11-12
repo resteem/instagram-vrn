@@ -1,47 +1,45 @@
 <?
-	require_once(getenv('DOCUMENT_ROOT') . '/lib/functions.php');
+	require_once(getenv('DOCUMENT_ROOT') . '/lib/App.class.php');
+	$app = App::getInstance();
 
-	if (isAuthorized())
+	if ($app->isAuthorized())
 	{
-		redirect('/'); exit;
+		App::redirect('/'); exit;
 	}
 
-	$instagram = getInstagramInstance();
 
-	if (isDevMode())
+	if ($app->isDevMode())
 	{
-		$instagram->setAccessToken(DEV_ACCESS_TOKEN);
-		$instagram->setUsername(DEV_USER_NAME);
-		$instagram->setProfilePicture(DEV_USER_PIC);
-		$instagram->setUserId(DEV_USER_ID);
-		setInstagramInstance($instagram);
+		$app->setAccessToken(DEV_ACCESS_TOKEN);
+		$app->setUsername(DEV_USER_NAME);
+		$app->setProfilePicture(DEV_USER_PIC);
+		$app->setUserId(DEV_USER_ID);
 
-		redirect('/'); exit;
+		App::redirect('/'); exit;
 	}
 
 	if (!isset($_GET['code']) && !isset($_GET['error']))
 	{
 		// Step One: Direct my user to Instagram's authorization URL
-		redirect($instagram->getAuthUrl()); exit;
+		App::redirect($app->getAuthUrl()); exit;
 	}
 	else
 	{
 		// Step Two: Receive the redirect from Instagram
 		if (isset($_GET['error']))
 		{
-			showArray($_GET['error_description']);
+			App::showArray($_GET['error_description']);
 		}
 		else
 		{
 			// Step Three: Request the access_token
-			$response = $instagram->getAuthToken($_GET['code']);
+			$response = $app->getAuthToken($_GET['code']);
 
-			$instagram->setAccessToken($response->access_token);
-			$instagram->setUsername($response->user->username);
-			$instagram->setProfilePicture($response->user->profile_picture);
-			$instagram->setUserId($response->user->id);
-			setInstagramInstance($instagram);
+			$app->setAccessToken($response->access_token);
+			$app->setUsername($response->user->username);
+			$app->setProfilePicture($response->user->profile_picture);
+			$app->setUserId($response->user->id);
 
-			redirect('/'); exit;
+			App::redirect('/'); exit;
 		}
 	}
