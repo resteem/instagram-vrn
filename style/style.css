@@ -12,7 +12,9 @@ body {
 
 .logo {
 	float: left;
-	background: url(/images/logo.png) no-repeat 0 0;
+}
+
+.logo img {
 	height: 51px;
 	width: 51px;
 }
