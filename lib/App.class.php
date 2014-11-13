@@ -4,10 +4,13 @@
 
 	class App
 	{
+		const DEFAULT_DISTANCE = '5000';
+
 		protected static $instance = NULL;
 
 		private $_isDevMode = FALSE;
 		private $_instagram = NULL;
+		private $_cookieExpire = 0;
 
 		public static function getInstance()
 		{
@@ -28,6 +31,7 @@
 			);
 			$this->_instagram = new Instagram($arInstaParams);
 			$this->_isDevMode = (strpos($_SERVER['HTTP_HOST'], 'localhost') === 0);
+			$this->_cookieExpire = time() + 60 * 60 * 24 * 365; // 1 year
 		}
 
 		public static function showArray($value)
@@ -111,7 +115,8 @@
 					'ID' => $oInstaMedia->location->id,
 					'LATITUDE' => $oInstaMedia->location->latitude,
 					'LONGITUDE' => $oInstaMedia->location->longitude,
-					'LINK' => 'https://www.google.ru/maps?q=' . $oInstaMedia->location->latitude . ',' . $oInstaMedia->location->longitude,
+					// 'LINK' => 'https://www.google.ru/maps?q=' . $oInstaMedia->location->latitude . ',' . $oInstaMedia->location->longitude,
+					'LINK' => '/location?LAT=' . $oInstaMedia->location->latitude . '&LNG=' . $oInstaMedia->location->longitude,
 				),
 				'USER' => array(
 					'ID' => $oInstaMedia->user->id,
@@ -134,7 +139,7 @@
 
 		public function setAccessToken($value)
 		{
-			setcookie('ACCESS_TOKEN', $value);
+			setcookie('ACCESS_TOKEN', $value, $this->_cookieExpire);
 		}
 
 		public function getAccessToken()
@@ -144,7 +149,7 @@
 
 		public function setUsername($value)
 		{
-			setcookie('USERNAME', $value);
+			setcookie('USERNAME', $value, $this->_cookieExpire);
 		}
 
 		public function getUsername()
@@ -154,7 +159,7 @@
 
 		public function setProfilePicture($value)
 		{
-			setcookie('PROFILE_PICTURE', $value);
+			setcookie('PROFILE_PICTURE', $value, $this->_cookieExpire);
 		}
 
 		public function getProfilePicture()
@@ -164,7 +169,7 @@
 
 		public function setUserId($value)
 		{
-			setcookie('USER_ID', $value);
+			setcookie('USER_ID', $value, $this->_cookieExpire);
 		}
 
 		public function getUserId()

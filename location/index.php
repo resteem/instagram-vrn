@@ -38,18 +38,20 @@
 	?></div>
 	<div class="clear"></div>
 </header><?
-if (!$app->isAuthorized()):
-	?><br>Для просмотра фотографий требуется <a class="uline" href="/login">войти через Instagram</a>.<br><br><?
-else: // if (!$app->isAuthorized()):
-	$now = time();
-	$arParams = array(
-		'DISTANCE' => ($arLocations['DISTANCE'] ? $arLocations['DISTANCE'] : App::DEFAULT_DISTANCE),
-		'MIN_TIMESTAMP' => $now - (60 * 60 * 24), // yesterday
-		'MAX_TIMESTAMP' => $now,
-	);
-	$arAllMedia = $app->getMediaByLocationPoints($arLocations, $arParams);
-	include('inc/items.php');
-endif; // if (!$app->isAuthorized()):
+	require_once(getenv('DOCUMENT_ROOT') . '/lib/App.class.php');
+	$app = App::getInstance();
+
+	if (!empty($_GET['LAT']) && !empty($_GET['LNG']))
+	{
+		$now = time();
+		$arParams = array(
+			'DISTANCE' => '1',
+			// 'MIN_TIMESTAMP' => $now - (60 * 60 * 24), // yesterday
+			// 'MAX_TIMESTAMP' => $now,
+		);
+		$arAllMedia = $app->getMediaByLocationPoint(array('LAT' => $_GET['LAT'], 'LNG' => $_GET['LNG']), $arParams);
+		include(getenv('DOCUMENT_ROOT') . '/inc/items.php');
+	}
 ?><footer>
 	© 2014
 </footer>

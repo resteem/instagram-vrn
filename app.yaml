@@ -5,6 +5,9 @@ api_version: 1
 threadsafe: yes
 
 handlers:
+- url: /location
+  script: location/index.php
+
 - url: /logout
   script: logout/index.php
 
