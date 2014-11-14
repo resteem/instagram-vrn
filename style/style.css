@@ -70,6 +70,7 @@ a:visited.uline {
 }
 
 .item {
+	position: relative;
 	float: left;
 	border-radius: 4px;
 	background-color: #FFFFFF;
@@ -92,7 +93,7 @@ a:visited.uline {
 }
 
 .location {
-	background: url(/images/feed-assets.png) no-repeat -4px -204px;
+	background: url(/images/feed-location.png) no-repeat;
 	padding-left: 15px;
 	font-size: smaller;
 	margin-top: 3px;
@@ -102,6 +103,8 @@ a:visited.uline {
 
 .location .cover {
 	position: absolute;
+	width: 0px;
+	height: 0px;
 }
 
 .location .cover img {
@@ -141,4 +144,14 @@ a:visited.uline {
 
 .media img {
 	border-radius: 4px;
+}
+
+.video {
+	background: url(/images/vesper-frame-video-small.png) no-repeat;
+	display: block;
+	height: 27px;
+	width: 27px;
+	position: absolute;
+	right: 20px;
+	top: 70px;
 }

@@ -39,6 +39,7 @@
 				<a href="<?=$arMedia['MEDIA']['LINK'];?>" title="<?=$arMedia['MEDIA']['CAPTION'];?>">
 					<img src="<?=$arMedia['MEDIA']['URL_LOW']?>">
 				</a>
+				<?if ($arMedia['MEDIA']['TYPE'] === 'video'):?><div class="video"></div><?endif;?>
 			</div>
 		</div><?
 		endforeach;
