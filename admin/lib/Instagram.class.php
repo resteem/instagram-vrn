@@ -5,6 +5,7 @@
 		const URL_MEDIA_SEARCH = 'https://api.instagram.com/v1/media/search';
 		const URL_MEDIA_LOCATION_ID = 'https://api.instagram.com/v1/locations/%LOCATION_ID%/media/recent';
 		const URL_MEDIA_USER_ID = 'https://api.instagram.com/v1/users/%USER_ID%/media/recent/';
+		const URL_MEDIA_TAGS = 'https://api.instagram.com/v1/tags/%TAGS%/media/recent';
 		const URL_AUTH = 'https://api.instagram.com/oauth/authorize';
 		const URL_ACCESS_TOKEN = 'https://api.instagram.com/oauth/access_token';
 
@@ -22,26 +23,46 @@
 		public function getMediaByLocationId($location_id, $arParams)
 		{
 			$url = self::URL_MEDIA_LOCATION_ID .
-				'?access_token=' . $arParams['ACCESS_TOKEN'] .
-				'&min_timestamp=' . $arParams['MIN_TIMESTAMP'] .
-				'&max_timestamp=' . $arParams['MAX_TIMESTAMP']
+				'?access_token=' . $arParams['ACCESS_TOKEN']
+				. '&min_timestamp=' . $arParams['MIN_TIMESTAMP']
+				. '&max_timestamp=' . $arParams['MAX_TIMESTAMP']
 			;
-			$url = str_replace('%LOCATION_ID%', $location_id, $url);
+			$url = str_replace('%LOCATION_ID%', urlencode($location_id), $url);
 			return $this->_getMediaByUrl($url);
 		}
 
 		public function getMediaByUserId($user_id, $arParams)
 		{
 			$url = self::URL_MEDIA_USER_ID .
-				'?access_token=' . $arParams['ACCESS_TOKEN'] .
-				'&count=' . $arParams['COUNT'] .
-				'&min_id=' . $arParams['MIN_ID'] .
-				'&max_id=' . $arParams['MAX_ID'] .
-				'&min_timestamp=' . $arParams['MIN_TIMESTAMP'] .
-				'&max_timestamp=' . $arParams['MAX_TIMESTAMP']
+				// '?client_id=' . $this->getClientId() .
+				// or
+				'?access_token=' . $arParams['ACCESS_TOKEN']
+				. '&count=' . $arParams['COUNT']
+				. '&min_id=' . $arParams['MIN_ID']
+				. '&max_id=' . $arParams['MAX_ID']
+				. '&min_timestamp=' . $arParams['MIN_TIMESTAMP']
+				. '&max_timestamp=' . $arParams['MAX_TIMESTAMP']
 			;
-			$url = str_replace('%USER_ID%', $user_id, $url);
+			$url = str_replace('%USER_ID%', urlencode($user_id), $url);
 			return $this->_getMediaByUrl($url);
+		}
+
+		public function getMediaByTags($tags, $arParams)
+		{
+			$url = self::URL_MEDIA_TAGS .
+				'?access_token=' . $arParams['ACCESS_TOKEN']
+				. '&count=' . $arParams['COUNT']
+				. '&min_tag_id=' . $arParams['MIN_TAG_ID']
+				. '&max_tag_id=' . $arParams['MAX_TAG_ID']
+			;
+			$url = str_replace('%TAGS%', urlencode($tags), $url);
+			return $this->_getMediaByUrl($url);
+		}
+
+		public function getUserIdByLogin($login)
+		{
+			// @TODO get
+			return 0;
 		}
 
 		public function getMediaByLocationPoints($arPoints, $arParams)
@@ -58,12 +79,12 @@
 		public function getMediaByLocationPoint($arPoint, $arParams)
 		{
 			$url = self::URL_MEDIA_SEARCH .
-				'?access_token=' . $arParams['ACCESS_TOKEN'] .
-				'&distance=' . $arParams['DISTANCE'] .
-				'&min_timestamp=' . $arParams['MIN_TIMESTAMP'] .
-				'&max_timestamp=' . $arParams['MAX_TIMESTAMP'] .
-				'&lat=%LAT%&lng=%LNG%';
-			$url = str_replace(array('%LAT%', '%LNG%'), array($arPoint['LAT'], $arPoint['LNG']), $url);
+				'?access_token=' . $arParams['ACCESS_TOKEN']
+				. '&distance=' . $arParams['DISTANCE']
+				. '&min_timestamp=' . $arParams['MIN_TIMESTAMP']
+				. '&max_timestamp=' . $arParams['MAX_TIMESTAMP']
+				. '&lat=%LAT%&lng=%LNG%';
+			$url = str_replace(array('%LAT%', '%LNG%'), array(urlencode($arPoint['LAT']), urlencode($arPoint['LNG'])), $url);
 			return $this->_getMediaByUrl($url);
 		}
 

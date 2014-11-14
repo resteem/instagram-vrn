@@ -5,6 +5,9 @@ api_version: 1
 threadsafe: yes
 
 handlers:
+- url: /tag
+  script: tag/index.php
+
 - url: /user
   script: user/index.php
 

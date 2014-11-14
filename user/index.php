@@ -5,13 +5,13 @@
 
 	$now = time();
 	$arAllMedia = array();
-/*
+
 	if (!empty($_GET['LOGIN']))
 	{
-		// $user_id = $app->getUserIdByLogin($_GET['LOGIN']);
+		// not working, always returns 0
+		$user_id = $app->getUserIdByLogin($_GET['LOGIN']);
 	}
 	else
-*/
 	{
 		$user_id = $_GET['ID'];
 	}

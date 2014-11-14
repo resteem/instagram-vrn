@@ -17,10 +17,7 @@
 			return is_null(self::$instance) ? self::$instance = new self() : self::$instance;
 		}
 
-		protected function __clone()
-		{
-
-		}
+		protected function __clone() {}
 
 		protected function __construct()
 		{
@@ -119,6 +116,23 @@
 			return $arMedia;
 		}
 
+		public function getMediaByTags($tags, $arParams)
+		{
+			if (!array_key_exists('ACCESS_TOKEN', $arParams)) $arParams['ACCESS_TOKEN'] = $this->getAccessToken();
+			$arMedia = array();
+			$oInstaMedias = $this->_instagram->getMediaByTags($tags, $arParams);
+			foreach ($oInstaMedias as $key => $oInstaMedia)
+			{
+				$arMedia[$key] = $this->_getArMediaFromInsta($oInstaMedia);
+			}
+			return $arMedia;
+		}
+
+		public function getUserIdByLogin($login)
+		{
+			return $this->_instagram->getUserIdByLogin($login);
+		}
+
 		private function _getArMediaFromInsta($oInstaMedia)
 		{
 			$arMedia = array(
@@ -136,15 +150,25 @@
 					'COMMENTS_COUNT' => $oInstaMedia->comments->count,
 				),
 				'LOCATION' => array(
-					'NAME' => ($oInstaMedia->location->name ? $oInstaMedia->location->name : $oInstaMedia->location->latitude . ', ' . $oInstaMedia->location->longitude),
+					'NAME' => (
+						$oInstaMedia->location->name ?
+						$oInstaMedia->location->name : (
+							(!empty($oInstaMedia->location->latitude) && !empty($oInstaMedia->location->longitude)) ?
+							$oInstaMedia->location->latitude . ', ' . $oInstaMedia->location->longitude :
+							''
+						)
+					),
 					'ID' => $oInstaMedia->location->id,
 					'LATITUDE' => $oInstaMedia->location->latitude,
 					'LONGITUDE' => $oInstaMedia->location->longitude,
 					'GM_LINK' => 'https://www.google.ru/maps?q=' . $oInstaMedia->location->latitude . ',' . $oInstaMedia->location->longitude,
 					'LINK' => (
 						$oInstaMedia->location->id ?
-						'/location?ID=' . $oInstaMedia->location->id :
-						'/location?LAT=' . $oInstaMedia->location->latitude . '&LNG=' . $oInstaMedia->location->longitude
+						'/location?ID=' . $oInstaMedia->location->id : (
+							(!empty($oInstaMedia->location->latitude) && !empty($oInstaMedia->location->longitude)) ?
+							'/location?LAT=' . $oInstaMedia->location->latitude . '&LNG=' . $oInstaMedia->location->longitude :
+							''
+						)
 					),
 				),
 				'USER' => array(

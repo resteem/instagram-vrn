@@ -4,6 +4,8 @@
 	$app = App::getInstance();
 
 	$isLocationPage = (!empty($_GET['LAT']) && !empty($_GET['LNG']));
+	// $isLocationPage = FALSE;
+	$isUserPage = FALSE;
 	// $isUserPage = (!empty($_GET['USER']);
 ?>
 <!DOCTYPE html>
