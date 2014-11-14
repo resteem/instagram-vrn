@@ -13,9 +13,7 @@
 							<?=$arMedia['USER']['USERNAME'];?>
 						</a>
 						<div class="location">
-							<div class="cover">
-								<img src="/images/cover.png">
-							</div>
+							<div class="cover"><img src="/images/cover.png"></div>
 							<div class="location_a_wrapper">
 								<a class="uline" href="<?=$arMedia['LOCATION']['LINK'];?>" title="<?=$arMedia['LOCATION']['NAME'];?>">
 									<?=$arMedia['LOCATION']['NAME'];?>

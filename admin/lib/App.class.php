@@ -95,6 +95,18 @@
 			return $arMedia;
 		}
 
+		public function getMediaByLocationId($location_id, $arParams)
+		{
+			if (!array_key_exists('ACCESS_TOKEN', $arParams)) $arParams['ACCESS_TOKEN'] = $this->getAccessToken();
+			$arMedia = array();
+			$oInstaMedias = $this->_instagram->getMediaByLocationId($location_id, $arParams);
+			foreach ($oInstaMedias as $key => $oInstaMedia)
+			{
+				$arMedia[$key] = $this->_getArMediaFromInsta($oInstaMedia);
+			}
+			return $arMedia;
+		}
+
 		private function _getArMediaFromInsta($oInstaMedia)
 		{
 			$arMedia = array(
@@ -116,8 +128,13 @@
 					'ID' => $oInstaMedia->location->id,
 					'LATITUDE' => $oInstaMedia->location->latitude,
 					'LONGITUDE' => $oInstaMedia->location->longitude,
-					// 'LINK' => 'https://www.google.ru/maps?q=' . $oInstaMedia->location->latitude . ',' . $oInstaMedia->location->longitude,
-					'LINK' => '/location?LAT=' . $oInstaMedia->location->latitude . '&LNG=' . $oInstaMedia->location->longitude,
+					'GM_LINK' => 'https://www.google.ru/maps?q=' . $oInstaMedia->location->latitude . ',' . $oInstaMedia->location->longitude,
+					// 'LINK' => '/location?LAT=' . $oInstaMedia->location->latitude . '&LNG=' . $oInstaMedia->location->longitude,
+					'LINK' => (
+						$oInstaMedia->location->id ?
+						'/location?ID=' . $oInstaMedia->location->id :
+						'/location?LAT=' . $oInstaMedia->location->latitude . '&LNG=' . $oInstaMedia->location->longitude
+					),
 				),
 				'USER' => array(
 					'ID' => $oInstaMedia->user->id,

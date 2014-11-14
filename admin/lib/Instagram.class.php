@@ -3,6 +3,7 @@
 	{
 		const URL_LOGOUT = 'https://instagram.com/accounts/logout/';
 		const URL_MEDIA_SEARCH = 'https://api.instagram.com/v1/media/search';
+		const URL_MEDIA_LOCATION_ID = 'https://api.instagram.com/v1/locations/%LOCATION_ID%/media/recent';
 		const URL_AUTH = 'https://api.instagram.com/oauth/authorize';
 		const URL_ACCESS_TOKEN = 'https://api.instagram.com/oauth/access_token';
 
@@ -15,6 +16,17 @@
 			$this->setClientId($arParams['CLIENT_ID']);
 			$this->setClientSecret($arParams['CLIENT_SECRET']);
 			$this->setRedirectUri($arParams['REDIRECT_URI']);
+		}
+
+		public function getMediaByLocationId($location_id, $arParams)
+		{
+			$url = self::URL_MEDIA_LOCATION_ID .
+				'?access_token=' . $arParams['ACCESS_TOKEN'] .
+				'&min_timestamp=' . $arParams['MIN_TIMESTAMP'] .
+				'&max_timestamp=' . $arParams['MAX_TIMESTAMP']
+			;
+			$url = str_replace('%LOCATION_ID%', $location_id, $url);
+			return $this->_getMediaByUrl($url);
 		}
 
 		public function getMediaByLocationPoints($arPoints, $arParams)
@@ -36,8 +48,13 @@
 				'&min_timestamp=' . $arParams['MIN_TIMESTAMP'] .
 				'&max_timestamp=' . $arParams['MAX_TIMESTAMP'] .
 				'&lat=%LAT%&lng=%LNG%';
-			$arMedia = array();
 			$url = str_replace(array('%LAT%', '%LNG%'), array($arPoint['LAT'], $arPoint['LNG']), $url);
+			return $this->_getMediaByUrl($url);
+		}
+
+		private function _getMediaByUrl($url)
+		{
+			$arMedia = array();
 			$oData = json_decode(file_get_contents($url));
 			if ($oData->meta->code == 200)
 			{
