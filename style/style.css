@@ -85,7 +85,7 @@ a:visited.uline {
 	float: left;
 }
 
-.author img {
+.author img.profile {
 	border-radius: 20px;
 	margin-right: 8px;
 	width: 40px;
@@ -98,6 +98,15 @@ a:visited.uline {
 	margin-top: 3px;
 	overflow: hidden;
 	max-width: 170px;
+}
+
+.location .cover {
+	position: absolute;
+}
+
+.location .cover img {
+	position: relative;
+	left: 140px;
 }
 
 .location .location_a_wrapper {

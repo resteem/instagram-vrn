@@ -5,7 +5,7 @@
 				<div class="author">
 					<div class="left">
 						<a href="<?=$arMedia['USER']['PROFILE_URL'];?>" title="<?=$arMedia['USER']['FULL_NAME'];?>">
-							<img src="<?=$arMedia['USER']['PROFILE_PICTURE'];?>" alt="<?=$arMedia['USER']['USERNAME'];?>">
+							<img class="profile" src="<?=$arMedia['USER']['PROFILE_PICTURE'];?>" alt="<?=$arMedia['USER']['USERNAME'];?>">
 						</a>
 					</div>
 					<div class="left">
@@ -13,6 +13,9 @@
 							<?=$arMedia['USER']['USERNAME'];?>
 						</a>
 						<div class="location">
+							<div class="cover">
+								<img src="/images/cover.png">
+							</div>
 							<div class="location_a_wrapper">
 								<a class="uline" href="<?=$arMedia['LOCATION']['LINK'];?>" title="<?=$arMedia['LOCATION']['NAME'];?>">
 									<?=$arMedia['LOCATION']['NAME'];?>
