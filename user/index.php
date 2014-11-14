@@ -5,23 +5,27 @@
 
 	$now = time();
 	$arAllMedia = array();
-
-	if (!empty($_GET['LAT']) && !empty($_GET['LNG']))
+/*
+	if (!empty($_GET['LOGIN']))
 	{
-		$arParams = array(
-			'DISTANCE' => '1',
-			// 'MIN_TIMESTAMP' => $now - (60 * 60 * 24), // yesterday
-			// 'MAX_TIMESTAMP' => $now,
-		);
-		$arAllMedia = $app->getMediaByLocationPoint(array('LAT' => $_GET['LAT'], 'LNG' => $_GET['LNG']), $arParams);
+		// $user_id = $app->getUserIdByLogin($_GET['LOGIN']);
 	}
-	elseif (!empty($_GET['ID']))
+	else
+*/
+	{
+		$user_id = $_GET['ID'];
+	}
+
+	if (!empty($user_id))
 	{
 		$arParams = array(
+			// 'COUNT' => 10,
+			// 'MIN_ID' => '',
+			// 'MAX_ID' => '',
 			// 'MIN_TIMESTAMP' => $now - (60 * 60 * 24), // yesterday
 			// 'MAX_TIMESTAMP' => $now,
 		);
-		$arAllMedia = $app->getMediaByLocationId($_GET['ID'], $arParams);
+		$arAllMedia = $app->getMediaByUserId($_GET['ID'], $arParams);
 	}
 
 	if (!empty($arAllMedia))

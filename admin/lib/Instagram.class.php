@@ -4,6 +4,7 @@
 		const URL_LOGOUT = 'https://instagram.com/accounts/logout/';
 		const URL_MEDIA_SEARCH = 'https://api.instagram.com/v1/media/search';
 		const URL_MEDIA_LOCATION_ID = 'https://api.instagram.com/v1/locations/%LOCATION_ID%/media/recent';
+		const URL_MEDIA_USER_ID = 'https://api.instagram.com/v1/users/%USER_ID%/media/recent/';
 		const URL_AUTH = 'https://api.instagram.com/oauth/authorize';
 		const URL_ACCESS_TOKEN = 'https://api.instagram.com/oauth/access_token';
 
@@ -26,6 +27,20 @@
 				'&max_timestamp=' . $arParams['MAX_TIMESTAMP']
 			;
 			$url = str_replace('%LOCATION_ID%', $location_id, $url);
+			return $this->_getMediaByUrl($url);
+		}
+
+		public function getMediaByUserId($user_id, $arParams)
+		{
+			$url = self::URL_MEDIA_USER_ID .
+				'?access_token=' . $arParams['ACCESS_TOKEN'] .
+				'&count=' . $arParams['COUNT'] .
+				'&min_id=' . $arParams['MIN_ID'] .
+				'&max_id=' . $arParams['MAX_ID'] .
+				'&min_timestamp=' . $arParams['MIN_TIMESTAMP'] .
+				'&max_timestamp=' . $arParams['MAX_TIMESTAMP']
+			;
+			$url = str_replace('%USER_ID%', $user_id, $url);
 			return $this->_getMediaByUrl($url);
 		}
 
