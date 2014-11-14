@@ -1,5 +1,5 @@
 <?
-	require_once(getenv('DOCUMENT_ROOT') . '/lib/App.class.php');
+	require_once(getenv('DOCUMENT_ROOT') . '/admin/lib/App.class.php');
 	$app = App::getInstance();
 	$app->logout();
 

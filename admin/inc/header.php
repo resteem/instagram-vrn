@@ -1,7 +1,10 @@
 <?
-	include_once('db/locations.php');
-	require_once('lib/App.class.php');
+	require_once(getenv('DOCUMENT_ROOT') . '/admin/db/locations.php');
+	require_once(getenv('DOCUMENT_ROOT') . '/admin/lib/App.class.php');
 	$app = App::getInstance();
+
+	$isLocationPage = (!empty($_GET['LAT']) && !empty($_GET['LNG']));
+	// $isUserPage = (!empty($_GET['USER']);
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -20,12 +23,25 @@
 <header>
 	<div class="left">
 		<div class="logo">
-			<img src="/images/logo.png" title="Воронеж в Инстаграме">
+			<?
+			// style="border-radius: 7px;"
+			?>
+			<a href="/"><?
+				if ($isLocationPage):
+					?><img src="/images/logo.png" title="Воронеж в Инстаграме"><?
+				else:
+					?><img src="/images/logo.png" title="Воронеж в Инстаграме"><?
+				endif;
+			?></a>
 		</div>
 		<div class="header">
-			<h1>Воронеж в Инстаграме</h1>
-			<h2>Что сегодня фотографируют в Воронеже</h2>
-		</div>
+			<h1>Воронеж в Инстаграме</h1><?
+			if ($isLocationPage):
+				?><h2><?=$_GET['LAT'];?>, <?=$_GET['LNG'];?></h2><?
+			else:
+				?><h2>Что сегодня фотографируют в Воронеже</h2><?
+			endif;
+		?></div>
 	</div>
 	<div class="right"><?
 		if ($app->isAuthorized()):

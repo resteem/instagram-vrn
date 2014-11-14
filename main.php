@@ -1,9 +1,9 @@
 <?
-	include('inc/header.php');
-	require_once('lib/App.class.php');
+	include('admin/inc/header.php');
+	require_once('admin/lib/App.class.php');
 	$app = App::getInstance();
 
-	include_once('db/locations.php');
+	include_once('admin/db/locations.php');
 	if ($app->isAuthorized())
 	{
 		$now = time();
@@ -13,8 +13,8 @@
 			'MAX_TIMESTAMP' => $now,
 		);
 		$arAllMedia = $app->getMediaByLocationPoints($arLocations, $arParams);
-		include('inc/items.php');
+		include('admin/inc/items.php');
 	}
 
-	include('inc/footer.php');
+	include('admin/inc/footer.php');
 ?>

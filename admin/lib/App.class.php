@@ -31,6 +31,7 @@
 			);
 			$this->_instagram = new Instagram($arInstaParams);
 			$this->_isDevMode = (strpos($_SERVER['HTTP_HOST'], 'localhost') === 0);
+			// for auth cookie
 			$this->_cookieExpire = time() + 60 * 60 * 24 * 365; // 1 year
 		}
 
